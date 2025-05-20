@@ -1,6 +1,6 @@
 import os
 import time
-import re  # Fixes the 're' module error
+import re  
 import joblib
 import pandas as pd
 from pathlib import Path
@@ -20,8 +20,8 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import LinearSVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-from keras.models import Sequential  # Fixed Sequential import
-from keras.layers import LSTM, Dense, Embedding  # Fixed layer imports
+from keras.models import Sequential  
+from keras.layers import LSTM, Dense, Embedding  
 from transformers import BertTokenizer, TFBertForSequenceClassification
 import tensorflow as tf
 
@@ -36,7 +36,6 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
-# Global variables to store results
 model_results = []
 current_dataset = None
 vectorizer = None
