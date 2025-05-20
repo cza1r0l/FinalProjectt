@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h2>Game Description</h2>
+    <p>{{ description }}</p>
+
+    <h3>Predicted Genres:</h3>
+    <ul>
+        {% for genre in genres %}
+        <li>{{ genre }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Try another description</a>
+</body>
+</html>
