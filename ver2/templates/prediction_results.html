@@ -1,0 +1,17 @@
+<html>
+<head>
+    <title>Prediction Results</title>
+</head>
+<body>
+    <h1>Genre Prediction Results</h1>
+    <p><strong>Description:</strong> {{ description }}</p>
+    <p><strong>Predicted Genres:</strong></p>
+    <ul>
+        {% for genre in genres %}
+        <li>{{ genre }}</li>
+        {% endfor %}
+    </ul>
+    <p><em>Predicted using {{ model_name }}</em></p>
+    <a href="/">Back to home</a>
+</body>
+</html>
