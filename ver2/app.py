@@ -169,6 +169,7 @@ async def predict_genre(request: Request, description: str = Form(...)):
 
 @app.post("/train", response_class=HTMLResponse)
 async def train_models(request: Request, file: UploadFile):
+    MODELS_LOADED = True
     global current_dataset, vectorizer, mlb, model_results
     df = await load_data(file)
     df['description'] = df['description'].apply(clean_text)
