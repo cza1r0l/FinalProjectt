@@ -136,6 +136,37 @@ async def force_upload():
     with open("templates/upload.html", "r") as f:
         return HTMLResponse(f.read())
 
+MODELS_LOADED = False
+@app.get("/predict", response_class=HTMLResponse)
+async def show_predict_form(request: Request):
+    return templates.TemplateResponse("predict_form.html", {"request": request})
+
+@app.post("/predict", response_class=HTMLResponse)
+async def predict_genre(request: Request, description: str = Form(...)):
+    if not MODELS_LOADED:
+        return templates.TemplateResponse("error.html", {
+            "request": request,
+            "error": "Models not loaded. Please train first."
+        })
+
+    try:
+        desc_cleaned = clean_text(description)
+        vectorized = vectorizer.transform([desc_cleaned])
+        prediction = model.predict(vectorized)
+        genres = mlb.inverse_transform(prediction)
+
+        return templates.TemplateResponse("prediction_results.html", {
+            "request": request,
+            "description": description,
+            "genres": genres[0] if genres else ["No genres predicted"],
+            "model_name": "Logistic Regression"
+        })
+    except Exception as e:
+        return templates.TemplateResponse("error.html", {
+            "request": request,
+            "error": f"Error: {str(e)}"
+        })
+
 @app.post("/train", response_class=HTMLResponse)
 async def train_models(request: Request, file: UploadFile):
     global current_dataset, vectorizer, mlb, model_results
