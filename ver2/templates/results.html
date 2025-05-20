@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Training Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 1000px; margin: 0 auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .best { background-color: #d4edda; }
+        .btn { background: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Model Training Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Model</th>
+                <th>Accuracy</th>
+                <th>Training Time (s)</th>
+                <th>Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr {% if loop.first %}class="best"{% endif %}>
+                <td>{{ result.name }}</td>
+                <td>{{ "%.2f"|format(result.accuracy * 100) }}%</td>
+                <td>{{ "%.2f"|format(result.time) }}</td>
+                <td>{{ loop.index }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="margin-top: 20px;">
+        <a href="/" class="btn">Back to Home</a>
+    </div>
+</body>
+</html>

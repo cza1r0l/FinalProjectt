@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Dataset</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .form-group { margin-bottom: 15px; }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Your Game Dataset</h1>
+    <form action="/train" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="file">Select JSON file:</label>
+            <input type="file" id="file" name="file" accept=".json" required>
+        </div>
+        <button type="submit" class="btn">Train Models</button>
+    </form>
+</body>
+</html>
